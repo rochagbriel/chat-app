@@ -1,5 +1,4 @@
 // Purpose: to render the start screen of the chat app
-
 import { useState } from 'react';
 import {
   StyleSheet,
@@ -17,7 +16,7 @@ const Start = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require('../assets/background.png')}
+      source={require('../assets/background.png')} 
       resizeMode='cover'
       style={styles.background}
     >
@@ -30,56 +29,60 @@ const Start = ({ navigation }) => {
             value={name}
             placeholder='Your name'
           />
-          <Text style={styles.backgroundText}>Choose Background Color:</Text>
-          <View style={styles.colorButtonDisplay}>
-            <TouchableOpacity
-              onPress={() => setColor('#090C08')}
-              style={[
-                color === '#090C08'
-                  ? styles.colorButtonSelected
-                  : color === '#090C08'
-                  ? styles.colorButtonSelected
-                  : styles.colorButton,
-                { backgroundColor: '#090C08' },
-              ]}
-            />
-            <TouchableOpacity
-              onPress={() => setColor('#474056')}
-              style={[
-                color === '#474056'
-                  ? styles.colorButtonSelected
-                  : styles.colorButton,
-                { backgroundColor: '#474056' },
-              ]}
-            />
-            <TouchableOpacity
-              onPress={() => setColor('#8A95A5')}
-              style={[
-                color === '#8A95A5'
-                  ? styles.colorButtonSelected
-                  : styles.colorButton,
-                { backgroundColor: '#8A95A5' },
-              ]}
-            />
-            <TouchableOpacity
-              onPress={() => setColor('#B9C6AE')}
-              style={[
-                color === '#B9C6AE'
-                  ? styles.colorButtonSelected
-                  : styles.colorButton,
-                { backgroundColor: '#B9C6AE' },
-              ]}
-            />
+          <View style={styles.containerColor}>
+            <Text style={styles.backgroundText}>Choose Background Color:</Text>
+            <View style={styles.colorButtonDisplay}>
+              <TouchableOpacity
+                onPress={() => setColor('#090C08')}
+                style={[
+                  color === '#090C08'
+                    ? styles.colorButtonSelected
+                    : color === '#090C08'
+                    ? styles.colorButtonSelected
+                    : styles.colorButton,
+                  { backgroundColor: '#090C08' },
+                ]}
+              />
+              <TouchableOpacity
+                onPress={() => setColor('#474056')}
+                style={[
+                  color === '#474056'
+                    ? styles.colorButtonSelected
+                    : styles.colorButton,
+                  { backgroundColor: '#474056' },
+                ]}
+              />
+              <TouchableOpacity
+                onPress={() => setColor('#8A95A5')}
+                style={[
+                  color === '#8A95A5'
+                    ? styles.colorButtonSelected
+                    : styles.colorButton,
+                  { backgroundColor: '#8A95A5' },
+                ]}
+              />
+              <TouchableOpacity
+                onPress={() => setColor('#B9C6AE')}
+                style={[
+                  color === '#B9C6AE'
+                    ? styles.colorButtonSelected
+                    : styles.colorButton,
+                  { backgroundColor: '#B9C6AE' },
+                ]}
+              />
+            </View>
           </View>
-          <TouchableOpacity
-            style={styles.startButton}
-            title='Start Chatting'
-            onPress={() =>
-              navigation.navigate('Chat', { name: name, color: color })
-            }
-          >
-            <Text style={styles.startText}>Start Chatting</Text>
-          </TouchableOpacity>
+          <View style={styles.containerStart}>
+            <TouchableOpacity
+              style={styles.startButton}
+              title='Start Chatting'
+              onPress={() =>
+                navigation.navigate('Chat', { name: name, color: color })
+              }
+            >
+              <Text style={styles.startText}>Start Chatting</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ImageBackground>
@@ -93,6 +96,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  containerColor: {
+    flex: 1,
+    width: '88%',
+    height: '20%',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginTop: 15,
+    },
+    containerStart: {
+    width: '88%',
+    alignItems: 'center',
+    marginTop: 15,
+    },
   chatConfig: {
     width: '88%',
     height: '44%',
@@ -133,10 +149,12 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
+    marginTop: 40,
   },
   colorButtonSelected: {
     width: 50,
     height: 50,
+    marginTop: 40,
     borderRadius: 25,
     borderWidth: 3,
     borderColor: '#757083',
@@ -150,9 +168,9 @@ const styles = StyleSheet.create({
     height: '20%',
   },
   startButton: {
-    marginTop: 15,
-    width: '88%',
-    height: '20%',
+    width: '100%',
+    height: 60,
+    marginBottom: 20,
     backgroundColor: '#757083',
     justifyContent: 'center',
     alignItems: 'center',
