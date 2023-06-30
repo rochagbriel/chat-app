@@ -7,16 +7,17 @@ import {
   TouchableOpacity,
   TextInput,
   ImageBackground,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 const Start = ({ navigation }) => {
   // navigation prop is passed in from App.js
-  const [name, setName] = useState('');
-  const [color, setColor] = useState('');
+  const [name, setName] = useState(''); // set name state
+  const [color, setColor] = useState(''); // set color state
 
   return (
     <ImageBackground
-      source={require('../assets/background.png')} 
+      source={require('../assets/background.png')}
       resizeMode='cover'
       style={styles.background}
     >
@@ -24,6 +25,9 @@ const Start = ({ navigation }) => {
         <Text style={styles.title}>Chat App</Text>
         <View style={styles.chatConfig}>
           <TextInput
+            accessible={true} // accessible for screen readers
+            accessibilityLabel='Enter your name' // label for screen readers
+            accessibilityHint='Lets you type in your name' // hint for screen readers
             style={styles.textInput}
             onChangeText={setName}
             value={name}
@@ -33,6 +37,10 @@ const Start = ({ navigation }) => {
             <Text style={styles.backgroundText}>Choose Background Color:</Text>
             <View style={styles.colorButtonDisplay}>
               <TouchableOpacity
+                accessible={true}
+                accessibilityLabel='Black background'
+                accessibilityHint='Lets you choose a black background color for the chat screen'
+                accessibilityRole='button'
                 onPress={() => setColor('#090C08')}
                 style={[
                   color === '#090C08'
@@ -44,15 +52,23 @@ const Start = ({ navigation }) => {
                 ]}
               />
               <TouchableOpacity
+                accessible={true}
+                accessibilityLabel='Purple background'
+                accessibilityHint='Lets you choose a purple background color for the chat screen'
+                accessibilityRole='button' // role for screen readers
                 onPress={() => setColor('#474056')}
                 style={[
-                  color === '#474056'
+                  color === '#474056' 
                     ? styles.colorButtonSelected
                     : styles.colorButton,
                   { backgroundColor: '#474056' },
                 ]}
               />
               <TouchableOpacity
+                accessible={true}
+                accessibilityLabel='Grey background'
+                accessibilityHint='Lets you choose a grey background color for the chat screen'
+                accessibilityRole='button'
                 onPress={() => setColor('#8A95A5')}
                 style={[
                   color === '#8A95A5'
@@ -62,6 +78,10 @@ const Start = ({ navigation }) => {
                 ]}
               />
               <TouchableOpacity
+                accessible={true}
+                accessibilityLabel='Green background'
+                accessibilityHint='Lets you choose a green background color for the chat screen'
+                accessibilityRole='button'
                 onPress={() => setColor('#B9C6AE')}
                 style={[
                   color === '#B9C6AE'
@@ -74,6 +94,10 @@ const Start = ({ navigation }) => {
           </View>
           <View style={styles.containerStart}>
             <TouchableOpacity
+              accessible={true}
+              accessibilityLabel='Start Chatting'
+              accessibilityHint='Lets you start chatting with your friends'
+              accessibilityRole='button'
               style={styles.startButton}
               title='Start Chatting'
               onPress={() =>
@@ -84,6 +108,9 @@ const Start = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
+        {Platform.OS === 'ios' ? (
+          <KeyboardAvoidingView behavior='padding' /> // add KeyboardAvoidingView for ios
+        ) : null}
       </View>
     </ImageBackground>
   );
@@ -103,12 +130,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     marginTop: 15,
-    },
-    containerStart: {
+  },
+  containerStart: {
     width: '88%',
     alignItems: 'center',
     marginTop: 15,
-    },
+  },
   chatConfig: {
     width: '88%',
     height: '44%',
