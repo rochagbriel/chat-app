@@ -46,10 +46,10 @@ const Chat = ({ route, navigation }) => {
     <GiftedChat 
         messages={messages}
         renderBubble={renderBubble}
-        onSend={messages => onSend(messages)} 
+        onSend={messages => setMessages(previousMessages => GiftedChat.append(previousMessages, messages))} 
         user={{
             _id: 1,
-        }} 
+        }}
     />
     {Platform.OS === 'android' ? ( 
         <KeyboardAvoidingView behavior="height" /> // add KeyboardAvoidingView for android
