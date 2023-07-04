@@ -6,7 +6,17 @@ location.
 
 ## Technologies Used
 
-This App was written using React Native and developed using Expo.
+This app was developed using the following technologies:
+
+- React Native: A JavaScript framework for building native mobile apps.
+- Expo: A set of tools and services for building and deploying React Native applications.
+- Firestore: A cloud-based database service provided by Firebase, which offers real-time data synchronization using WebSockets.
+
+In addition to the above technologies, the following tools were used during development:
+
+- Expo Client App: The Expo Client App is a mobile app that allows developers to test and preview their Expo projects directly on iOS and Android devices. It provides a convenient way to view and interact with the app during development without the need for separate device emulators.
+- Android Studio: The official integrated development environment (IDE) for Android app development. It provides a rich set of tools, including an emulator for testing and debugging Android apps.
+- Xcode Simulator: The official simulator provided by Apple for testing and debugging iOS apps. It is part of Xcode, the integrated development environment (IDE) for iOS app development.
 
 ## Features
 
