@@ -8,9 +8,24 @@ import {
   TextInput,
   ImageBackground,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
+// Firebase
+import { getAuth, signInAnonymously } from 'firebase/auth';
 
 const Start = ({ navigation }) => {
+  const auth = getAuth(); // get auth from firebase
+
+  const signInUser = () => { // sign in user anonymously
+    signInAnonymously(auth)
+        .then(result => {
+            navigation.navigate('Chat', { userID: result.user.uid , name: name ,  color: color });
+            Alert.alert('Signed in Successfully!');
+        })
+        .catch(error => {
+            Alert.alert('Unable to sign in. Please try later.');
+        });
+};
   // navigation prop is passed in from App.js
   const [name, setName] = useState(''); // set name state
   const [color, setColor] = useState(''); // set color state
@@ -100,9 +115,7 @@ const Start = ({ navigation }) => {
               accessibilityRole='button'
               style={styles.startButton}
               title='Start Chatting'
-              onPress={() =>
-                navigation.navigate('Chat', { name: name, color: color })
-              }
+              onPress={signInUser}
             >
               <Text style={styles.startText}>Start Chatting</Text>
             </TouchableOpacity>
