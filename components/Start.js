@@ -16,16 +16,21 @@ import { getAuth, signInAnonymously } from 'firebase/auth';
 const Start = ({ navigation }) => {
   const auth = getAuth(); // get auth from firebase
 
-  const signInUser = () => { // sign in user anonymously
+  const signInUser = () => {
+    // sign in user anonymously
     signInAnonymously(auth)
-        .then(result => {
-            navigation.navigate('Chat', { userID: result.user.uid , name: name ,  color: color });
-            Alert.alert('Signed in Successfully!');
-        })
-        .catch(error => {
-            Alert.alert('Unable to sign in. Please try later.');
+      .then((result) => {
+        navigation.navigate('Chat', {
+          userID: result.user.uid,
+          name: name,
+          color: color,
         });
-};
+        Alert.alert('Signed in Successfully!');
+      })
+      .catch((error) => {
+        Alert.alert('Unable to sign in. Please try later.');
+      });
+  };
   // navigation prop is passed in from App.js
   const [name, setName] = useState(''); // set name state
   const [color, setColor] = useState(''); // set color state
@@ -73,7 +78,7 @@ const Start = ({ navigation }) => {
                 accessibilityRole='button' // role for screen readers
                 onPress={() => setColor('#474056')}
                 style={[
-                  color === '#474056' 
+                  color === '#474056'
                     ? styles.colorButtonSelected
                     : styles.colorButton,
                   { backgroundColor: '#474056' },
