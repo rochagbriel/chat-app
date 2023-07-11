@@ -5,6 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNetInfo } from '@react-native-community/netinfo'; // import useNetInfo hook
 import { Alert, LogBox } from 'react-native';
 import { useEffect } from 'react';
+import { getStorage } from 'firebase/storage';
+
+LogBox.ignoreLogs(["AsyncStorage has been extracted from"]);
 
 // React Native Navigation
 const Stack = createNativeStackNavigator();
@@ -35,6 +38,7 @@ const App = () => {
 
   // Get a reference to the database service
   const db = getFirestore(app);
+  const storage = getStorage(app);
 
   useEffect(() => {
     if (connectionStatus.isConnected === false) {
@@ -54,6 +58,7 @@ const App = () => {
             <Chat
               isConnected={connectionStatus.isConnected}
               db={db}
+              storage={storage}
               {...props}
             />
           )}

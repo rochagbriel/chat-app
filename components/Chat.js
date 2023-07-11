@@ -1,6 +1,6 @@
 // Purpose: Chat component for the Chat screen
 import { useEffect, useState } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 // Firebase
 import {
@@ -8,17 +8,20 @@ import {
   addDoc,
   onSnapshot,
   query,
-  orderBy,
+  orderBy
 } from 'firebase/firestore';
 // AsyncStorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// Custom Actions
+import CustomActions from './CustomActions';
+import MapView from 'react-native-maps';
 
-const Chat = ({ db, route, navigation, isConnected }) => {
+const Chat = ({ db, route, navigation, isConnected, storage }) => {
   const { name, color, userID } = route.params; // get name and color from route.params
   const [messages, setMessages] = useState([]); // set messages state
 
   const loadCachedMessages = async () => {
-    const cachedMessages = (await AsyncStorage.getItem('messages')) || '[]';
+    const cachedMessages = await AsyncStorage.getItem('messages') || '[]';
     setMessages(JSON.parse(cachedMessages));
   };
 
@@ -97,6 +100,34 @@ const Chat = ({ db, route, navigation, isConnected }) => {
     );
   };
 
+  const renderCustomActions = (props) => {
+    // renderCustomActions function
+    return <CustomActions onSend={onSend} userID={userID} storage={storage} {...props} />;
+  };
+
+  const renderCustomView = (props) => {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{
+            width: 150,
+            height: 100,
+            borderRadius: 13,
+            margin: 3,
+          }}
+          region={{
+            latitude: currentMessage.location.latitude,
+            longitude: currentMessage.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: color }]}>
       <GiftedChat
@@ -105,6 +136,8 @@ const Chat = ({ db, route, navigation, isConnected }) => {
         onSend={(messages) => onSend(messages)}
         user={{ _id: userID, name }}
         renderInputToolbar={renderInputToolbar}
+        renderActions={renderCustomActions}
+        renderCustomView={renderCustomView}
       />
       {Platform.OS === 'android' ? (
         <KeyboardAvoidingView behavior='height' /> // add KeyboardAvoidingView for android
@@ -117,6 +150,7 @@ const styles = StyleSheet.create({
   // styles for the Chat component
   container: {
     flex: 1,
+    marginBottom: 25,
   },
 });
 

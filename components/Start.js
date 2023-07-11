@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     width: '88%',
-    height: '20%',
+    height: 65,
     padding: 15,
     borderWidth: 2,
     borderColor: '#757083',
