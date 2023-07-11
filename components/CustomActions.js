@@ -38,7 +38,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
       let result = await ImagePicker.launchCameraAsync();
 
       if (!result.canceled) await uploadAndSendImage(result.assets[0].uri);
-      
+
     } else Alert.alert("Permissions haven't been granted.");
   };
 
@@ -93,7 +93,14 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
   }
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onActionPress}>
+    <TouchableOpacity
+        accessible={true}
+        accessibilityLabel='comunication options'
+        accessibilityHint='Lets you choose to send an image or your geolocation.'
+        accessibilityRole='button'
+        style={styles.container} 
+        onPress={onActionPress}
+    >
       <View style={[styles.wrapper, wrapperStyle]}>
         <Text style={[styles.iconText, iconTextStyle]}>+</Text>
       </View>
