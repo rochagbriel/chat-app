@@ -26,15 +26,15 @@ To run the 'Chat App' locally on your development environment, follow these step
 
 2. Clone this repository to your local directory using the following command:
 
-git clone https://github.com/rochagbriel/chat-app.git
+    `git clone` https://github.com/rochagbriel/chat-app.git
 
 3. Navigate to the project directory:
 
-cd chat-app
+    `cd chat-app`
 
 4. Install the project dependencies by running the following command:
 
-npm install
+    `npm install`
 
 5. Configure the Firestore database:
 
@@ -43,7 +43,7 @@ npm install
 
 6. Start the app by running the following command:
 
-npm start
+    `npm start`
 
 This will start the Expo development server and display a QR code in the terminal.
 
